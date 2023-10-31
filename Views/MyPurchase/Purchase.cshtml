@@ -1,0 +1,101 @@
+﻿@*
+   My Purchase History Page
+   Author: Chen Yu
+*@
+
+@{
+    ViewData["Title"] = "Purchase";
+    var orders = ViewData["Orders"] as List<Order>; // cast to Order List
+}
+
+
+
+
+<div class="container">
+    <div class="row justify-content-center align-content-center">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand col-3">My Purchase History</a>
+                @*post to Purchase action in MyPurchaseController*@
+                
+
+            </div>
+        </nav>
+        @* item title *@
+        <div class="card my-2">
+            <div class="card-body p-4">
+                <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-3">
+                        <h4>Item</h4>
+                    </div>
+                    <div class="col-2">
+                        <h4>description</h4>
+                    </div>
+                    <div class="col-2">
+                        <h5>Quantity</h5>
+                    </div>
+                    <div class="col-2">
+                        <h5 class="mb-0">Unit Price</h5>
+                    </div>
+                    <div class="col-2 text-end">
+                        <h5>Purchased Date</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*
+    using razor to generate rest items
+    for loop @Orders
+    *@
+    @foreach (Order order in @orders)
+    {
+        var orderAct = order.Activationcodes.ToList() as List<Activationcode>;
+        <div class="card my-2">
+            <div class="card-body p-4">
+                <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-3">
+                        <img src=/img/@order.Item.ItemImage
+                             class="img-fluid rounded-3" alt="Cotton T-shirt">
+                    </div>
+                    <div class="col-3">
+                        <p class="lead fw-normal my-1">@order.Item.ItemName</p>
+                        <p class="lead fw-bold my-1">Activation Code:</p>
+
+                        @*if quantity > 1, display select box for all activation code*@
+                        @{
+                            if (order.Quantity > 1)
+                            {
+                                <select class="form-select" class="lead fw-bold my-1">
+                                    @for (int i = 0; i < order.Quantity; i++)
+                                    {
+                                        // get the ith from List order.Activationcodes
+
+                                        <option value="@i">@orderAct[i].Value</option>
+                                    }
+                                </select>
+                            }
+                            else
+                            {
+                                <p class="lead my-1">@orderAct[0].Value</p>
+                            }
+                        }
+
+                        <p>@order.Item.ItemDescription</p>
+                    </div>
+                    <div class="col-2">
+                        <h5>@order.Quantity</h5>
+                    </div>
+                    <div class="col-2">
+                        <h5 class="mb-0">$@order.Item.ItemPrice</h5>
+                    </div>
+                    <div class="col-2 text-end">
+                        <h5>@order.OrderDate</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+</div>

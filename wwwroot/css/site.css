@@ -1,0 +1,191 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.Login-container {
+    height: 650px;
+    padding-left: 30%;
+}
+
+/* Layout */
+.Layout-ul, .Layout-li, .Layout-a {
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+}
+
+.Layout-ul {
+    background-color: rgba(0,0,0,0.8);
+    width: 100%;
+    height: 40px;
+    position: relative;
+    justify-content: center;
+}
+
+.Layout-li {
+    margin: 0 20px;
+    margin-top: 6px;
+}
+
+.Layout-ul .Layout-li .Layout-a {
+    color: rgba(255,255,255,0.6);
+    transition: .5s;
+}
+
+    .Layout-ul .Layout-li .Layout-a:hover {
+        color: rgba(255,255,255,1.0);
+        transition: .5s;
+    }
+/*
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+*/
+
+
+/* Login */
+#Login {
+    display: flex;
+}
+
+#Login-button {
+    
+    padding-left: 125px;
+}
+
+.Login-container {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+}
+
+.Login-td {
+    width: 600px;
+}
+
+.username {
+    text-align: center;
+}
+
+.Login-input {
+    width:200px;
+    height:auto;
+}
+
+.Login-text {
+    text-align:left;
+}
+/* Gallery */
+.Gallery-foreach {
+    width: 100%;
+    text-align: center;
+}
+
+
+.Gallery-foreach-sub {
+    box-sizing: border-box; /*borderº∆À„‘⁄width÷–*/
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    width: 30%;
+    height: 340px;
+    border: 1px solid black;
+    float: left;
+    margin: 0px 20px 20px 0px;
+}
+
+.Gallery-foreach:after {
+    display: block;
+    clear: both;
+    content: ".";
+    height: 0;
+    visibility: hidden;
+    display: block;
+}
+
+.Gallery-div .Gallery-table {
+    text-align: center;
+}
+
+.cell {
+    border: 1px solid #000;
+}
+
+.Gallery-title {
+    display: flex;
+}
+
+
+.Gallery-menu {
+    width: 87%;
+}
+
+.Gallery-total::-webkit-outer-spin-button,
+.Gallery-total::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.Gallery-Button {
+    background: #0073e6;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 17px;
+    line-height: 1.17;
+    font-weight: 400;
+    width: auto;
+    border: none;
+    cursor: pointer;
+}
+
+/* ViewCart */
+.ViewCart-title {
+    display: flex;
+}
+
+.ViewCart-menu {
+    width: 87%;
+}
+
+.ViewCart-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.ViewCart-price {
+    text-align: right;
+}
+
+.itemAmt {
+    text-align: center;
+    width: 100px;
+}
+
+.ViewCart-td {
+    border: 1px solid black;
+}

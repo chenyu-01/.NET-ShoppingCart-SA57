@@ -1,0 +1,69 @@
+﻿
+@{
+	var items = (List<Item>)ViewData["items"];
+	var count = ViewData["CartItemCount"];
+	var searchStr = ViewData["searchStr"];
+	var username = ViewData["username"];
+	bool logged = true;
+	if (username == null || username.Equals("unknown"))
+	{
+		logged = false;
+	}
+}
+@section Scripts{
+	<script src="/js/search.js"></script>
+	<link href="/css/site.css" />
+}
+<div class="Gallery-title">
+	<div class="Gallery-menu">
+		<div>
+			<span>Hello, @username </span>
+			&nbsp 
+			<span>@Html.ActionLink("My Purchase","Purchase","MyPurchase")</span>
+			| 
+			@if (logged)
+			{
+				<span>@Html.ActionLink("Logout","Logout","Login")</span>
+			} else
+			{
+				<span>@Html.ActionLink("Login", "Login", "Login")</span>
+			}
+		</div>
+		@*<i class="fa-solid fa-cart-shopping" align="right"></i>*@
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</div>
+
+	<div id="Gallery-menu">
+		<button type="submit" class="fa-solid fa-cart-shopping" align="right" onclick="location.href='@Url.Action("ViewCart", "ViewCart")'"></button>
+		<span>Total: @count</span>
+	</div>
+</div>
+
+
+
+
+<form id="searchForm" class="d-flex col-3" action="Gallery" method="post">
+	<input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchStr" value=@searchStr>
+	<button class="btn btn-primary" type="submit">Search</button>
+</form>
+
+<div>
+	<div class="Gallery-foreach">
+
+		@foreach (var item in items)
+		{
+
+			<div class="Gallery-foreach-sub">
+				<img src="/img/@item.ItemImage" width="160" height="160">
+				<h1 align="center">@item.ItemName</h1>
+				<p>@item.ItemDescription</p>
+				@*<p align="center"><button type="submit" align="center" formaction="AddToCart?itemClicked=@item.Id"> $@item.Price - Add To Cart</button></p>*@
+				@*<p align="center"><button type="submit" align="center" onclick="location.href='@Url.Action("AddToCart", "Gallery", new { itemClicked = @item })'"> $@item.Price - Add To Cart</button></p>*@
+				<p align="center">
+					<button class="Gallery-Button" type="submit" align="center" onclick="location.href='@Url.Action("AddToCart", "Gallery", new { Id=@item.ItemID, Name=@item.ItemName, Description=@item.ItemDescription, ImagePath=@item.ItemImage, Price=@item.ItemPrice })'"> $@item.ItemPrice - Add To Cart</button>
+				</p>
+			</div>
+		}
+
+	</div>
+</div>

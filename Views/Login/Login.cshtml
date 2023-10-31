@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login";
+    
+}
+@section Scripts{
+    <link href="./css/site.css" />
+}
+<div>
+    <br />
+    <br />
+    <br />
+</div>
+<div class="Login-container">
+    <form action="Login" method="post">
+        <table>
+            <!-- username -->
+            <tr>
+
+                <td>
+                    <div class="Login-text">
+                        <label>Username</label>
+                    </div>
+                </td>
+
+                <td class="Login-td">
+                    <div>
+                        <input name="username" class="Login-input" id="username" placeholder="Username" />
+                    </div>
+                    <div id="userMsg"></div>
+                </td>
+
+            </tr>
+
+            <!-- beautify-->
+            <tr>
+                <td>&nbsp</td>
+            </tr>
+
+            <!-- pwd -->
+            <tr>
+                <td>
+                    <div class="Login-text">
+                        <label for="password">Password</label>
+                    </div>
+                </td>
+
+                <td class="Login-td">
+                    <div>
+                        <input name="password" class="Login-input" type="password" id="password" placeholder="password" />
+                    </div>
+                    
+                </td>
+
+            <tr>
+                <td></td>
+                <td class="Login-td" style="height:32.8px">
+                    <div id="errorMsg" class="col-sm-6 my-1 alert-danger">@ViewBag.Error</div>
+                </td>
+
+            </tr>
+
+
+                <!-- login button -->
+            <tr>
+                <td></td>
+                <td>
+                    <br />
+                    <div id="Login-button">
+                        <button type="submit" class="btn btn-primary" value="Submit">Login</button>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+

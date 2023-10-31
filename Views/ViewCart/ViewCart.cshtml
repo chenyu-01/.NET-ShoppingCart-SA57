@@ -1,0 +1,82 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var cartItems = (List<CartItem>)ViewData["cartItems"];
+
+}
+
+<head>
+    <link href="~/css/ViewCart.css" rel="stylesheet" />
+</head>
+<div class="ViewCart-title">
+    <div class="ViewCart-menu">
+        <span>View Cart </span> &nbsp   <span>@Html.ActionLink("ContinueShopping", "ContinueShopping", "ViewCart")</span> &nbsp  <span>@Html.ActionLink("Checkout", "Checkout", "ViewCart")</span>  &nbsp
+    </div>
+    <div id="totalAmt"></div>
+
+</div>
+
+<div>
+    <br />
+    <br />
+    <br />
+</div>
+
+
+<div class="ViewCart-body">
+    <table>
+        @if (cartItems.Count == 0)
+        {
+            <tr>
+                <td>
+                    <h1 align="center">Your cart is empty</h1>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <div class="container">
+                @foreach (CartItem cartItem in cartItems)
+                {
+                    <div class="card my-2">
+                        <div class="card-body p-4">
+                            <div class="row d-flex justify-content-between align-items-center">
+                                <div class="col-3">
+                                    <img src=/img/@cartItem.Item.ItemImage
+                                         class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                    <p class="lead fw-normal my-1">@cartItem.Item.ItemName</p>
+                                </div>
+                                <div class="col-3">
+
+                                    <p>@cartItem.Item.ItemDescription</p>
+                                </div>
+                                <div class="col-4 d-inline-flex justify-content-around">
+                                    <form id="itemForm_@cartItem.Item.ItemID" oninput="this.submit" action="/ViewCart/UpdateQuantity" method="post">
+                                        <h5>Price:</h5>
+                                        <div class="item_price" id="price_@cartItem.Item.ItemID">$@cartItem.Item.ItemPrice</div>
+
+                                        <h5>Quantity:</h5>
+                                        <input type="number" min="0" class="itemAmt" id="quan_@cartItem.Item.ItemID" value=@cartItem.Quantity name="Quantity" />
+                                        <input type="hidden" name="ItemID" value=@cartItem.Item.ItemID />
+                                    </form>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <form action="/ViewCart/DeleteItem" method="post" oninput="this.submit">
+                                        <input type="hidden" name="ItemID" value=@cartItem.Item.ItemID />
+                                        <button class="btn btn-danger">Delete Item</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+
+    </table>
+</div>
+@section Scripts {
+    <script src="~/js/cart.js"></script>
+}
